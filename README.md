@@ -48,7 +48,7 @@ runs the test suite as part of the build.
 ./mvnw spring-boot:run
 ```
 
-The server starts on **http://localhost:8080**.
+The server starts on **http://localhost:8080** by default unless explicitly told not to do so.
 
 ## Run the tests only
 
@@ -66,6 +66,8 @@ SmartExpenseTracker/
 ├── src/
 │   ├── main/
 │   │   ├── java/com/diligent/expensetracker/
+│   │   │   ├── config/
+│   │   │   │   └── MapperConfig.java
 │   │   │   ├── controller/
 │   │   │   │   └── ExpenseController.java
 │   │   │   ├── dto/
