@@ -229,7 +229,23 @@ class ExpenseControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray());
     }
-
+    @Test
+void getCategorySummary_shouldReturnCategoryTotals() throws Exception {
+ 
+    List<CategorySummaryResponse> summary = List.of(
+            new CategorySummaryResponse(ExpenseCategory.FOOD, new BigDecimal("150.00"), 2),
+            new CategorySummaryResponse(ExpenseCategory.TRAVEL, BigDecimal.ZERO, 0)
+    );
+ 
+    when(expenseService.getCategorySummary()).thenReturn(summary);
+ 
+    mockMvc.perform(get("/api/v1/expenses/summary/by-category"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.data", hasSize(2)))
+            .andExpect(jsonPath("$.data[0].category").value("FOOD"))
+            .andExpect(jsonPath("$.data[0].total").value(150.00))
+            .andExpect(jsonPath("$.data[0].count").value(2));
+}
     @Test
     void getExpensesByCategory_invalidCategory_returns400() throws Exception {
         mockMvc.perform(get(BASE_URL + "/category/{category}", "NOT_A_CATEGORY"))

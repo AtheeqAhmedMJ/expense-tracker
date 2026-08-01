@@ -66,8 +66,6 @@ SmartExpenseTracker/
 ├── src/
 │   ├── main/
 │   │   ├── java/com/diligent/expensetracker/
-│   │   │   ├── config/
-│   │   │   │   └── MapperConfig.java
 │   │   │   ├── controller/
 │   │   │   │   └── ExpenseController.java
 │   │   │   ├── dto/
@@ -177,6 +175,7 @@ and lets you try requests directly from the browser.
 | GET    | `/api/v1/expenses/search?keyword=...`  | Search by title keyword              |
 | GET    | `/api/v1/expenses/summary`             | Overall total + transaction count    |
 | GET    | `/api/v1/expenses/monthly-summary`     | Totals grouped by year/month         |
+| GET    | `/api/v1/expenses/summary/by-category` | Totals grouped by category           |
 
 Valid `category` values: `FOOD`, `TRAVEL`, `HEALTH`, `SHOPPING`,
 `ENTERTAINMENT`, `OTHER`.

@@ -10,9 +10,11 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -76,7 +78,9 @@ public class GlobalExceptionHandler {
             Exception ex
     ) {
 
+        log.error("Unhandled exception", ex);
+
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(ApiResponse.error(ex.getMessage()));
+                .body(ApiResponse.error("An unexpected error occurred. Please try again later."));
     }
 }
